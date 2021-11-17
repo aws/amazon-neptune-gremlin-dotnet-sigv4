@@ -5,11 +5,11 @@ A custom library that extends the [Apache TinkerPop Gremlin.NET client](https://
 
 For example usage refer to:
 
-[NeptuneGremlinNETSigV4Example.cs](): This example shows how to leverage this library for establishing an authenticated connection to Neptune.
+[NeptuneGremlinNETSigV4Example.cs](example/NeptuneGremlinNETSigV4Example.cs): This example shows how to leverage this library for establishing an authenticated connection to Neptune.
 
 ## Usage
 
-A snippet of the code from [NeptuneGremlinNETSigV4Example.cs]():
+A snippet of the code from [NeptuneGremlinNETSigV4Example.cs](example/NeptuneGremlinNETSigV4Example.cs):
 
 ```
 var neptune_host = "neptune-endpoint"; // ex: mycluster.cluster.us-east-1.neptune.amazonaws.com
@@ -22,7 +22,7 @@ var remoteConnection = new DriverRemoteConnection(gremlinClient);
 var g = Traversal().WithRemote(remoteConnection);
 ```
 
-The `GremlinClient` library accepts both a `GremlinServer` object as well as a `webSocketConfiguration` object that contains a custom configuration set for establishing the WebSocket connection to Amazon Neptune.  The [SigV4RequestSigner](https://gitlab.aws.dev/amazon-neptune/amazon-neptune-gremlin-dotnet-sigv4/-/blob/master/src/SigV4RequestSigner.cs) library fetchs IAM credentials using the `FallbackCredentialsFactory` API (which works similarly to the [Java Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)), performs the proper Signature Version 4 signing of an http request, and creates the proper WebSocket configuration based on this signed http request.  One can then pass this `webSocketConfiguration` to the `GremlinClient` to create the connection to Neptune.
+The `GremlinClient` library accepts both a `GremlinServer` object as well as a `webSocketConfiguration` object that contains a custom configuration set for establishing the WebSocket connection to Amazon Neptune.  The [SigV4RequestSigner](src/SigV4RequestSigner.cs) library fetchs IAM credentials using the `FallbackCredentialsFactory` API (which works similarly to the [Java Default Credential Provider Chain](https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html)), performs the proper Signature Version 4 signing of an http request, and creates the proper WebSocket configuration based on this signed http request.  One can then pass this `webSocketConfiguration` to the `GremlinClient` to create the connection to Neptune.
 
 ### Using within Amazon EC2
 
