@@ -1,11 +1,10 @@
 ## Amazon Neptune Gremlin .NET SigV4
 
+This project provides a custom library that extends the [Apache TinkerPop Gremlin.NET client](https://github.com/apache/tinkerpop/tree/master/gremlin-dotnet) to enable AWS IAM Signature Version 4 signing for establishing authenticated connections to [Amazon Neptune](https://aws.amazon.com/neptune/).
 
-A custom library that extends the [Apache TinkerPop Gremlin.NET client](https://github.com/apache/tinkerpop/tree/master/gremlin-dotnet) to enable AWS IAM Signature Version 4 signing for establishing an authenticated connection to Amazon Neptune.
+For example usage refer to:[NeptuneGremlinNETSigV4Example.cs](example/NeptuneGremlinNETSigV4Example.cs). This example shows how to leverage this library for establishing an authenticated connection to Neptune.
 
-For example usage refer to:
-
-[NeptuneGremlinNETSigV4Example.cs](example/NeptuneGremlinNETSigV4Example.cs): This example shows how to leverage this library for establishing an authenticated connection to Neptune.
+For general information on how to connect to Amazon Neptune using Gremlin and best practices, refer to the [documentation](https://docs.aws.amazon.com/neptune/latest/userguide/best-practices-gremlin.html).
 
 ## Usage
 
