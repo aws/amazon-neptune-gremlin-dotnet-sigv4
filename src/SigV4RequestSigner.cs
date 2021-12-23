@@ -78,11 +78,12 @@ namespace Amazon.Neptune.Gremlin.Driver
                 Method = HttpMethod.Get,
                 RequestUri = new Uri("https://" + neptune_endpoint + "/gremlin")
             };
-            var signedrequest = this.Sign(request, "neptune-db", _region);
+            var signedrequest = this.Sign(request, "neptune-db", _region, _token);
 
             return new Action<ClientWebSocketOptions>(options => { 
                     options.SetRequestHeader("host", neptune_endpoint);
                     options.SetRequestHeader("x-amz-date", signedrequest.Headers.GetValues("x-amz-date").FirstOrDefault());
+                    options.SetRequestHeader("x-amz-security-token", signedrequest.Headers.GetValues("x-amz-security-token").FirstOrDefault());
                     options.SetRequestHeader("Authorization", signedrequest.Headers.GetValues("Authorization").FirstOrDefault());
                     }); 
         }
