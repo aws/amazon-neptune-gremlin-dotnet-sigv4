@@ -43,7 +43,7 @@ namespace NeptuneExample
             var neptune_host = "neptune-endpoint"; // ex: mycluster.cluster.us-east-1.neptune.amazonaws.com
             var neptune_port = 8182;
 
-            var gremlinServer = new GremlinServer(neptune_host, neptune_port);
+            var gremlinServer = new GremlinServer(neptune_host, neptune_port, enableSsl: true);
             var gremlinClient = new GremlinClient(gremlinServer, webSocketConfiguration: new SigV4RequestSigner().signRequest(neptune_host, neptune_port));
             var remoteConnection = new DriverRemoteConnection(gremlinClient);
             var g = Traversal().WithRemote(remoteConnection);

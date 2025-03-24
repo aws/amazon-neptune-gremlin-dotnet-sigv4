@@ -19,6 +19,7 @@ namespace Amazon.Neptune.Gremlin.Driver
         private readonly string _region;
         private readonly SHA256 _sha256;
         private const string algorithm = "AWS4-HMAC-SHA256";
+        private const string DefaultRegion = "us-east-1";
 
         /* Constructor
          *
@@ -34,7 +35,7 @@ namespace Amazon.Neptune.Gremlin.Driver
             _access_key = awsCredentials.AccessKey;
             _secret_key = awsCredentials.SecretKey;
             _token = awsCredentials.Token;
-            _region = region.SystemName; //ex: us-east-1
+            _region = region?.SystemName ?? DefaultRegion; //ex: set via AWS_REGION env variable 
             _sha256 = SHA256.Create();
         }
 
