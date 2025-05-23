@@ -84,7 +84,9 @@ namespace Amazon.Neptune.Gremlin.Driver
             return new Action<ClientWebSocketOptions>(options => { 
                     options.SetRequestHeader("host", neptune_endpoint);
                     options.SetRequestHeader("x-amz-date", signedrequest.Headers.GetValues("x-amz-date").FirstOrDefault());
-                    options.SetRequestHeader("x-amz-security-token", signedrequest.Headers.GetValues("x-amz-security-token").FirstOrDefault());
+                    if (signedrequest.Headers.TryGetValues("x-amz-security-token", out var values)) {
+                        options.SetRequestHeader("x-amz-security-token", values.FirstOrDefault());
+                    }
                     options.SetRequestHeader("Authorization", signedrequest.Headers.GetValues("Authorization").FirstOrDefault());
                     }); 
         }
@@ -117,7 +119,7 @@ namespace Amazon.Neptune.Gremlin.Driver
                 request.Headers.Host = request.RequestUri.Host + ":" + request.RequestUri.Port;
             }
             
-            if (sessionToken != null ) {
+            if (!string.IsNullOrEmpty(sessionToken)) {
                 request.Headers.Add("x-amz-security-token",sessionToken);
             }
 
